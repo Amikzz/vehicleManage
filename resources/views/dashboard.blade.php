@@ -25,9 +25,6 @@
                                 <h4 class="text-xl font-semibold">Vehicles with Services Due</h4>
                                 <p class="text-3xl font-bold">{{ $dueServices->count() }}</p>
                                 <ul class="mt-4 space-y-2">
-                                    @foreach ($dueServices->take(3) as $service)
-                                        <li>{{ $service->vehicle->license_plate }} - Due: {{ $service->next_service_date->format('F j, Y') }}</li>
-                                    @endforeach
                                     @if ($dueServices->count() > 3)
                                         <li class="text-sm italic">+{{ $dueServices->count() - 3 }} more...</li>
                                     @endif
@@ -55,7 +52,9 @@
                                     </div>
                                     <ul id="dueServiceList" class="text-gray-700 dark:text-gray-100 space-y-2 max-h-80 overflow-y-auto">
                                         @foreach ($dueServices as $service)
-                                            <li>{{ $service->vehicle->license_plate }} - Due: {{ $service->next_service_date->format('F j, Y') }}</li>
+                                            <li>
+                                                {{ $service->vehicle->license_plate }}
+                                            </li>
                                         @endforeach
                                     </ul>
                                     <div class="mt-6 text-right">
