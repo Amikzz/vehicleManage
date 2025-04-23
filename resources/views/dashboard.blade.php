@@ -24,11 +24,6 @@
                             <div class="bg-yellow-500 text-white rounded-lg p-6 cursor-pointer" @click="showModal = true">
                                 <h4 class="text-xl font-semibold">Vehicles with Services Due</h4>
                                 <p class="text-3xl font-bold">{{ $dueServices->count() }}</p>
-                                <ul class="mt-4 space-y-2">
-                                    @if ($dueServices->count() > 3)
-                                        <li class="text-sm italic">+{{ $dueServices->count() - 3 }} more...</li>
-                                    @endif
-                                </ul>
                             </div>
 
                             <!-- Modal -->
