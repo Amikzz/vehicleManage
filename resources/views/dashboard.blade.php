@@ -76,7 +76,7 @@
 
                     <!-- Total Maintenance Cost -->
                     <div class="bg-purple-500 text-white rounded-lg p-6">
-                        <h4 class="text-xl font-semibold">Total Maintenance Cost</h4>
+                        <h4 class="text-xl font-semibold">Total Maintenance Cost (Last 30 days)</h4>
                         <p class="text-3xl font-bold">Rs. {{ number_format($totalMaintenanceCost, 2) }}</p>
                     </div>
 
