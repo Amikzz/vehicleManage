@@ -48,7 +48,7 @@
                                     <ul id="dueServiceList" class="text-gray-700 dark:text-gray-100 space-y-2 max-h-80 overflow-y-auto">
                                         @foreach ($dueServices as $service)
                                             <li>
-                                                {{ $service->vehicle->license_plate }}
+                                                {{ $service->vehicle->license_plate }} - {{ $service->next_service_mileage }}
                                             </li>
                                         @endforeach
                                     </ul>
