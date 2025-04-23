@@ -12,8 +12,8 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //show all the vehicles
-        $vehicles = Vehicle::all();
+        // Show all the vehicles ordered by type
+        $vehicles = Vehicle::orderBy('status', 'asc')->get();
         return view('vehicles', compact('vehicles'));
     }
 
