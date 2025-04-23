@@ -35,7 +35,7 @@
                             >
                                 <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full shadow-xl">
                                     <div class="flex justify-between items-center mb-4">
-                                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Vehicles with Services Due</h3>
+                                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Vehicles with Services Coming up or Due</h3>
                                         <button
                                             @click="showModal = false"
                                             class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-all duration-200 rounded-full w-8 h-8 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
