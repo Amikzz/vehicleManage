@@ -12,7 +12,7 @@ class MaintainanceController extends Controller
      */
     public function index()
     {
-        $maintainances = Maintainance::all();
+        $maintainances = Maintainance::orderBy('date', 'desc')->get();
         $vehicles = \App\Models\Vehicle::all();
         return view('maintainance', compact('maintainances', 'vehicles'));
     }

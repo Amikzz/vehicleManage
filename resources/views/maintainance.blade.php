@@ -62,7 +62,6 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">#</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Vehicle</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Maintainance Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Maintainance Mileage</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Cost</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Description</th>
 
@@ -76,7 +75,6 @@
                                     <td class="px-6 py-4">{{ $index + 1 }}</td>
                                     <td class="px-6 py-4">{{ $maintainace->vehicle->license_plate}}</td>
                                     <td class="px-6 py-4">{{ $maintainace->date }}</td>
-                                    <td class="px-6 py-4">{{ $maintainace->mileage }}</td>
                                     <td class="px-6 py-4">Rs. {{ number_format($maintainace->cost, 2) }}</td>
                                     <td class="px-6 py-4">{{ $maintainace->description }}</td>
                                 </tr>
