@@ -60,9 +60,9 @@
                             <thead class="bg-gray-100 dark:bg-gray-700">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">#</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Vehicle</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase  w-[150px]">Vehicle</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Maintainance Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Cost</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase w-[150px]">Cost</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Description</th>
 
                             </tr>
@@ -73,9 +73,9 @@
                                     data-vehicle="{{ $maintainace->vehicle->license_plate }}"
                                     data-date="{{ $maintainace->date }}">
                                     <td class="px-6 py-4">{{ $index + 1 }}</td>
-                                    <td class="px-6 py-4">{{ $maintainace->vehicle->license_plate}}</td>
+                                    <td class="px-6 py-4  w-[150px]">{{ $maintainace->vehicle->license_plate}}</td>
                                     <td class="px-6 py-4">{{ $maintainace->date }}</td>
-                                    <td class="px-6 py-4">Rs. {{ number_format($maintainace->cost, 2) }}</td>
+                                    <td class="px-6 py-4 w-[150px]">Rs. {{ number_format($maintainace->cost, 2) }}</td>
                                     <td class="px-6 py-4">{{ $maintainace->description }}</td>
                                 </tr>
                             @empty

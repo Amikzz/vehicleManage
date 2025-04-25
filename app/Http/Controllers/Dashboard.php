@@ -18,9 +18,8 @@ class Dashboard extends Controller
         $totalServiceCost = Service::whereDate('service_date', '>=', Carbon::now()->subDays(30))
             ->sum('service_cost');
 
-        // ✅ Total Maintenance Cost (cumulative)
         $totalMaintenanceCost = (Maintainance::whereDate('date', '>=', Carbon::now()->subDays(30))
-            ->sum('cost')) + $totalServiceCost;
+                ->sum('cost')) + $totalServiceCost;
 
         // Cost vs Date (Last 30 days)
         $costByDate = Service::whereDate('service_date', '>=', Carbon::now()->subDays(30))
@@ -32,7 +31,7 @@ class Dashboard extends Controller
         $dates = $costByDate->pluck('date')->map(fn($date) => Carbon::parse($date)->format('M d'))->toArray();
         $costs = $costByDate->pluck('total')->toArray();
 
-        // Cost vs Vehicle
+        // Service Cost vs Vehicle
         $costByVehicle = Service::with('vehicle')
             ->selectRaw('vehicle_id, SUM(service_cost) as total')
             ->groupBy('vehicle_id')
@@ -40,6 +39,27 @@ class Dashboard extends Controller
 
         $vehicleLabels = $costByVehicle->map(fn($item) => $item->vehicle->license_plate)->toArray();
         $vehicleCosts = $costByVehicle->pluck('total')->toArray();
+
+        // Maintenance Cost vs Vehicle
+        $maintainCostByVehicle = Maintainance::with('vehicle')
+            ->selectRaw('vehicle_id, SUM(cost) as total')
+            ->groupBy('vehicle_id')
+            ->get();
+
+        $maintenanceLabels = $maintainCostByVehicle->map(fn($item) => $item->vehicle->license_plate)->toArray();
+        $maintenanceCosts = $maintainCostByVehicle->pluck('total')->toArray();
+
+        // Combined Service + Maintenance Cost vs Vehicle
+        $combinedCostsByVehicle = [];
+
+        foreach ($vehicleLabels as $index => $label) {
+            $maintenanceIndex = array_search($label, $maintenanceLabels);
+            $combinedCost = $vehicleCosts[$index] + ($maintenanceIndex !== false ? $maintenanceCosts[$maintenanceIndex] : 0);
+            $combinedCostsByVehicle[$label] = $combinedCost;
+        }
+
+        $combinedLabels = array_keys($combinedCostsByVehicle);
+        $combinedCosts = array_values($combinedCostsByVehicle);
 
         return view('dashboard', compact(
             'totalVehicles',
@@ -49,7 +69,11 @@ class Dashboard extends Controller
             'dates',
             'costs',
             'vehicleLabels',
-            'vehicleCosts'
+            'vehicleCosts',
+            'maintenanceLabels',
+            'maintenanceCosts',
+            'combinedLabels',
+            'combinedCosts'
         ));
     }
 }
