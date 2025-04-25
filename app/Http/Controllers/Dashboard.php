@@ -6,6 +6,7 @@ use App\Models\Maintainance;
 use App\Models\Service;
 use App\Models\Vehicle;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Controller
 {
@@ -13,7 +14,20 @@ class Dashboard extends Controller
     {
         $totalVehicles = Vehicle::count();
 
-        $dueServices = Service::whereDate('next_service_date', '<=', Carbon::now()->addMonth())->get();
+        $today = Carbon::today();
+        $nextMonth = Carbon::today()->addMonth();
+
+        $dueServices = Service::select('id', 'vehicle_id', 'next_service_date', 'next_service_mileage')
+            ->whereIn(DB::raw('(vehicle_id, next_service_date)'), function ($query) {
+                $query->selectRaw('vehicle_id, MAX(next_service_date)')
+                    ->from('services')
+                    ->groupBy('vehicle_id');
+            })
+            ->where(function ($query) use ($today, $nextMonth) {
+                $query->whereBetween('next_service_date', [$today, $nextMonth])
+                    ->orWhere('next_service_date', '<', $today);
+            })
+            ->get();
 
         $totalServiceCost = Service::whereDate('service_date', '>=', Carbon::now()->subDays(30))
             ->sum('service_cost');
