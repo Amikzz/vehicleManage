@@ -30,4 +30,9 @@ class Vehicle extends Model
     {
         return ucfirst($value);
     }
+
+    public function meterReads()
+    {
+        return $this->hasMany(MeterRead::class);
+    }
 }

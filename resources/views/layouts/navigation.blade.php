@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('maintainances.index')" :active="request()->routeIs('maintainances.*')">
                         {{ __('Maintainance') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('meterreads.index')" :active="request()->routeIs('meterreads.*')">
+                        {{ __('Meter Reading') }}
+                    </x-nav-link>
                 </div>
             </div>
 

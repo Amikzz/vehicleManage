@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('vehicles', \App\Http\Controllers\VehicleController::class);
     Route::resource('services', \App\Http\Controllers\ServiceController::class);
     Route::resource('maintainances', \App\Http\Controllers\MaintainanceController::class);
+    Route::resource('meterreads', \App\Http\Controllers\MeterReadController::class);
 });
 
 require __DIR__.'/auth.php';
