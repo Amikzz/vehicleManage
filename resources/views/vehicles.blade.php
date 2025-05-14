@@ -39,6 +39,8 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Model</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Year</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">License Plate</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">License Expiry Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Insurance Expiry Date</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Status</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Actions</th>
                             </tr>
@@ -51,6 +53,8 @@
                                     <td class="px-6 py-4">{{ $vehicle->model }}</td>
                                     <td class="px-6 py-4">{{ $vehicle->year }}</td>
                                     <td class="px-6 py-4">{{ $vehicle->license_plate }}</td>
+                                    <td class="px-6 py-4">{{ $vehicle->license_expiration_date }}</td>
+                                    <td class="px-6 py-4">{{ $vehicle->insurance_expiration_date }}</td>
                                     <td class="px-6 py-4">
                                         <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full
                                             {{
@@ -62,7 +66,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 flex gap-2">
-                                        <button type="button" onclick="openEditModal({{ $vehicle->id }}, '{{ $vehicle->make }}', '{{ $vehicle->model }}', '{{ $vehicle->year }}', '{{ $vehicle->license_plate }}', '{{ $vehicle->color }}', '{{ $vehicle->type }}', '{{ $vehicle->status }}')"
+                                        <button type="button" onclick="openEditModal({{ $vehicle->id }}, '{{ $vehicle->make }}', '{{ $vehicle->model }}', '{{ $vehicle->year }}', '{{ $vehicle->license_plate }}', '{{ $vehicle->license_expiration_date }}', '{{ $vehicle->insurance_expiration_date }}', '{{ $vehicle->color }}', '{{ $vehicle->type }}', '{{ $vehicle->status }}')"
                                                 class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-3 py-1 rounded">
                                             Edit
                                         </button>
@@ -106,6 +110,14 @@
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">License Plate</label>
                                         <input type="text" name="license_plate" required class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">License Expiry Date</label>
+                                        <input type="date" name="license_expiration_date" required class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Insurance Expiry Date</label>
+                                        <input type="date" name="insurance_expiration_date" required class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white text-sm">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Color</label>
@@ -171,6 +183,14 @@
                                         <input type="text" name="license_plate" required id="editLicensePlate" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white text-sm">
                                     </div>
                                     <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">License Expiry Date</label>
+                                        <input type="date" name="license_expiration_date" required id="editLicenseExpiry" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Insurance Expiry Date</label>
+                                        <input type="date" name="insurance_expiration_date" required id="editInsuranceExpiry" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white text-sm">
+                                    </div>
+                                    <div>
                                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Color</label>
                                         <input type="text" name="color" required id="editColor" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white text-sm">
                                     </div>
@@ -207,7 +227,7 @@
                     </div>
 
                     <script>
-                        function openEditModal(id, make, model, year, licensePlate, color, type, status) {
+                        function openEditModal(id, make, model, year, licensePlate, licenseExpiry, insuranceExpiry, color, type, status) {
                             // Set the form action to include the vehicle ID for updating
                             document.getElementById('editVehicleForm').action = "{{ route('vehicles.update', ':vehicle_id') }}".replace(':vehicle_id', id);
 
@@ -216,6 +236,8 @@
                             document.getElementById('editModel').value = model;
                             document.getElementById('editYear').value = year;
                             document.getElementById('editLicensePlate').value = licensePlate;
+                            document.getElementById('editLicenseExpiry').value = licenseExpiry;
+                            document.getElementById('editInsuranceExpiry').value = insuranceExpiry;
                             document.getElementById('editColor').value = color;
                             document.getElementById('editType').value = type;
                             document.getElementById('editStatus').value = status;

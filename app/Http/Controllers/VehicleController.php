@@ -38,6 +38,8 @@ class VehicleController extends Controller
                 'year' => 'required|integer|min:1900|max:' . date('Y'),
                 'color' => 'required|string|max:255',
                 'license_plate' => 'required|string|max:10|unique:vehicles,license_plate',
+                'license_expiration_date' => 'nullable|date',
+                'insurance_expiration_date' => 'nullable|date',
                 'type' => 'required|string|max:255',
                 'status' => 'required',
             ]);
@@ -49,6 +51,8 @@ class VehicleController extends Controller
             $vehicle->year = $request->year;
             $vehicle->color = $request->color;
             $vehicle->license_plate = $request->license_plate;
+            $vehicle->license_expiration_date = $request->license_expiration_date;
+            $vehicle->insurance_expiration_date = $request->insurance_expiration_date;
             $vehicle->type = $request->type;
             $vehicle->save();
             return redirect()->route('vehicles.index')->with('success', 'Vehicle created successfully.');
@@ -86,6 +90,8 @@ class VehicleController extends Controller
                 'year' => 'required|integer|min:1900|max:' . date('Y'),
                 'color' => 'required|string|max:255',
                 'license_plate' => 'required|string|max:10|unique:vehicles,license_plate,' . $vehicle->id,
+                'license_expiration_date' => 'nullable|date',
+                'insurance_expiration_date' => 'nullable|date',
                 'type' => 'required|string|max:255',
                 'status' => 'required',
             ]);
@@ -96,6 +102,8 @@ class VehicleController extends Controller
             $vehicle->year = $request->year;
             $vehicle->color = $request->color;
             $vehicle->license_plate = $request->license_plate;
+            $vehicle->license_expiration_date = $request->license_expiration_date;
+            $vehicle->insurance_expiration_date = $request->insurance_expiration_date;
             $vehicle->type = $request->type;
             $vehicle->status = $request->status;
             $vehicle->save();

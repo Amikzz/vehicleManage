@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('license_plate')->unique()->nullable();
             $table->string('type')->nullable();
             $table->string('status')->default('available')->nullable();
+            $table->date('license_expiration_date')->nullable();
+            $table->date('insurance_expiration_date')->nullable();
             $table->timestamps();
         });
     }

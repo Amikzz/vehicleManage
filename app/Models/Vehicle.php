@@ -12,6 +12,8 @@ class Vehicle extends Model
         'year',
         'color',
         'license_plate',
+        'license_expiration_date',
+        'insurance_expiration_date',
         'type',
         'status',
     ];
